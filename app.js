@@ -85,6 +85,7 @@ function setupEventListeners() {
         card.classList.add('active-filter');
       }
       renderFixtures();
+      updateHeroSection();
     });
   });
 
@@ -228,12 +229,17 @@ function renderFixtures() {
 function updateHeroSection() {
   const now = new Date();
   
+  // Filter fixtures by selected player if active
+  const relevantFixtures = activeFilters.player 
+    ? fixtures.filter(f => f.player === activeFilters.player)
+    : fixtures;
+
   // Find the first fixture in the future
-  let nextFix = fixtures.find(fix => new Date(fix.utcDateTime) > now);
+  let nextFix = relevantFixtures.find(fix => new Date(fix.utcDateTime) > now);
   
   // If all fixtures are past, take the last one
-  if (!nextFix) {
-    nextFix = fixtures[fixtures.length - 1];
+  if (!nextFix && relevantFixtures.length > 0) {
+    nextFix = relevantFixtures[relevantFixtures.length - 1];
   }
 
   const fixDate = new Date(nextFix.utcDateTime);
