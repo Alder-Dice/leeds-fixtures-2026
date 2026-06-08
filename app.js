@@ -9,15 +9,14 @@ const fixtures = [
   { id: 7, player: 'Gabriel Gudmundsson', initials: 'GG', nation: 'Sweden', flag: '🇸🇪', opponent: 'Netherlands', dateStr: 'June 20', timeStr: '5:00 PM', utcDateTime: '2026-06-20T17:00:00Z', venue: 'NRG Stadium, Houston, TX' },
   { id: 8, player: 'Ao Tanaka', initials: 'AT', nation: 'Japan', flag: '🇯🇵', opponent: 'Tunisia', dateStr: 'June 21', timeStr: '4:00 AM', utcDateTime: '2026-06-21T04:00:00Z', venue: 'Estadio BBVA, Guadalupe, MX' },
   { id: 9, player: 'Noah Okafor', initials: 'NO', nation: 'Switzerland', flag: '🇨🇭', opponent: 'Canada', dateStr: 'June 24', timeStr: '7:00 PM', utcDateTime: '2026-06-24T19:00:00Z', venue: 'BC Place, Vancouver, CAN' },
-  { id: 10, player: 'Ao Tanaka', initials: 'AT', nation: 'Japan', flag: '🇯🇵', opponent: 'Sweden', dateStr: 'June 25', timeStr: '11:00 PM', utcDateTime: '2026-06-25T23:00:00Z', venue: 'AT&T Stadium, Arlington, TX', isDerby: true },
-  { id: 11, player: 'Gabriel Gudmundsson', initials: 'GG', nation: 'Sweden', flag: '🇸🇪', opponent: 'Japan', dateStr: 'June 25', timeStr: '11:00 PM', utcDateTime: '2026-06-25T23:00:00Z', venue: 'AT&T Stadium, Arlington, TX', isDerby: true },
+  { id: 10, player: 'Ao Tanaka', initials: 'AT', nation: 'Japan', flag: '🇯🇵', opponent: 'Sweden', dateStr: 'June 25', timeStr: '11:00 PM', utcDateTime: '2026-06-25T23:00:00Z', venue: 'AT&T Stadium, Arlington, TX' },
+  { id: 11, player: 'Gabriel Gudmundsson', initials: 'GG', nation: 'Sweden', flag: '🇸🇪', opponent: 'Japan', dateStr: 'June 25', timeStr: '11:00 PM', utcDateTime: '2026-06-25T23:00:00Z', venue: 'AT&T Stadium, Arlington, TX' },
   { id: 12, player: 'Brenden Aaronson', initials: 'BA', nation: 'USA', flag: '🇺🇸', opponent: 'Turkey', dateStr: 'June 26', timeStr: '2:00 AM', utcDateTime: '2026-06-26T02:00:00Z', venue: 'SoFi Stadium, Los Angeles' }
 ];
 
 // App State
 let activeFilters = {
   player: null,    // Null means all players
-  status: 'all',   // 'all', 'upcoming', 'derby'
   search: ''
 };
 let isLocalTimezone = false;
@@ -30,11 +29,6 @@ const timezoneToggleBtn = document.getElementById('timezone-toggle');
 const tzBtnTextEl = document.getElementById('tz-btn-text');
 const resultsCountEl = document.getElementById('results-count');
 const searchInput = document.getElementById('search-input');
-
-// Filter Buttons
-const btnFilterAll = document.getElementById('btn-filter-all');
-const btnFilterUpcoming = document.getElementById('btn-filter-upcoming');
-const btnFilterDerby = document.getElementById('btn-filter-derby');
 const playerSummaryCards = document.querySelectorAll('.player-summary-card');
 
 // Modal Elements
@@ -73,10 +67,7 @@ function setupEventListeners() {
     renderFixtures();
   });
 
-  // Status Filters
-  btnFilterAll.addEventListener('click', () => setStatusFilter('all'));
-  btnFilterUpcoming.addEventListener('click', () => setStatusFilter('upcoming'));
-  btnFilterDerby.addEventListener('click', () => setStatusFilter('derby'));
+
 
   // Player Selection Cards
   playerSummaryCards.forEach(card => {
@@ -110,14 +101,7 @@ function setupEventListeners() {
   });
 }
 
-// Set Status Filter
-function setStatusFilter(status) {
-  activeFilters.status = status;
-  btnFilterAll.classList.toggle('active', status === 'all');
-  btnFilterUpcoming.classList.toggle('active', status === 'upcoming');
-  btnFilterDerby.classList.toggle('active', status === 'derby');
-  renderFixtures();
-}
+
 
 // Time Formatting Helpers
 function formatMatchDateTime(utcDateStr) {
@@ -155,16 +139,7 @@ function renderFixtures() {
       return false;
     }
 
-    // 2. Status Filter
-    const fixDate = new Date(fix.utcDateTime);
-    if (activeFilters.status === 'upcoming' && fixDate < now) {
-      return false;
-    }
-    if (activeFilters.status === 'derby' && !fix.isDerby) {
-      return false;
-    }
-
-    // 3. Search Filter
+    // 2. Search Filter
     if (activeFilters.search) {
       const matchesSearch = 
         fix.player.toLowerCase().includes(activeFilters.search) ||
@@ -204,7 +179,7 @@ function renderFixtures() {
     }
 
     const card = document.createElement('div');
-    card.className = `fixture-card glass ${fix.isDerby ? 'derby-card' : ''}`;
+    card.className = `fixture-card glass`;
     card.innerHTML = `
       <div class="fix-player-info">
         <div class="player-avatar-small">
@@ -220,7 +195,6 @@ function renderFixtures() {
       <div class="fix-vs">
         <span class="opp-badge">VS</span>
         <span class="fix-vs-text">${fix.opponent}</span>
-        ${fix.isDerby ? '<span class="badge" style="background: rgba(239, 68, 68, 0.1); color: var(--danger-color); border: 1px solid rgba(239, 68, 68, 0.2);"><i class="fa-solid fa-fire"></i> Leeds Derby</span>' : ''}
       </div>
 
       <div class="fix-date-time">

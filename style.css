@@ -581,13 +581,6 @@ header {
   font-weight: 600;
 }
 
-#btn-filter-derby.active {
-  background: linear-gradient(135deg, #b91c1c 0%, #ef4444 100%);
-  border-color: #ef4444;
-  color: #fff;
-  animation: pulse 1s infinite alternate;
-}
-
 /* Fixtures List Section */
 .fixtures-header {
   display: flex;
@@ -638,15 +631,6 @@ header {
   transform: translateX(4px);
   background-color: var(--bg-card-hover);
   border-color: rgba(255, 255, 255, 0.15);
-}
-
-.fixture-card.derby-card {
-  border: 1px dashed rgba(239, 68, 68, 0.5);
-  background: linear-gradient(90deg, rgba(22, 31, 56, 0.65) 0%, rgba(239, 68, 68, 0.05) 100%);
-}
-
-.fixture-card.derby-card:hover {
-  border-color: var(--danger-color);
 }
 
 .fix-player-info {
