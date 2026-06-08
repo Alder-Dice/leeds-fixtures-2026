@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Leeds United - World Cup 2026 Fixture Tracker</title>
+  <!-- Google Fonts: Plus Jakarta Sans for UI, Space Grotesk for Headings -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+  <!-- FontAwesome for beautiful icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Background Glows for modern dark aesthetic -->
+  <div class="glow-bg glow-1"></div>
+  <div class="glow-bg glow-2"></div>
+
+  <!-- Header -->
+  <header>
+    <div class="header-container">
+      <div class="logo-area">
+        <div class="lu-shield">
+          <span class="lu-text">LUFC</span>
+        </div>
+        <div class="title-sub">
+          <h1>Leeds United</h1>
+          <p class="subtitle">World Cup 2026 Player Tracker</p>
+        </div>
+      </div>
+      <div class="header-actions">
+        <button id="timezone-toggle" class="btn btn-secondary">
+          <i class="fa-solid fa-globe"></i> <span id="tz-btn-text">Switch to Local Time</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- Hero / Next Match & Countdown -->
+    <section class="hero-section">
+      <div class="hero-card glass">
+        <div class="hero-header">
+          <span class="badge badge-accent"><i class="fa-solid fa-hourglass-half"></i> NEXT FIXTURE</span>
+          <div class="timezone-indicator" id="hero-tz-indicator">All times in GMT</div>
+        </div>
+        
+        <div class="hero-content">
+          <div class="hero-team hero-player-team">
+            <div class="player-avatar-large" id="hero-player-avatar">
+              <span id="hero-player-initials">BA</span>
+              <span class="flag-badge-large" id="hero-player-flag">🇺🇸</span>
+            </div>
+            <h3 id="hero-player-name">Brenden Aaronson</h3>
+            <span class="nation-label" id="hero-player-nation">USA</span>
+          </div>
+
+          <div class="versus">VS</div>
+
+          <div class="hero-team hero-opponent-team">
+            <div class="opponent-avatar-large" id="hero-opponent-avatar">
+              <i class="fa-solid fa-shield-halved"></i>
+            </div>
+            <h3 id="hero-opponent-name">Paraguay</h3>
+            <span class="nation-label">Opponent</span>
+          </div>
+        </div>
+
+        <div class="hero-footer">
+          <div class="hero-info-grid">
+            <div class="info-item">
+              <i class="fa-regular fa-calendar"></i>
+              <div>
+                <div class="info-title">Kickoff Date</div>
+                <div class="info-val" id="hero-date">June 13, 2026</div>
+              </div>
+            </div>
+            <div class="info-item">
+              <i class="fa-regular fa-clock"></i>
+              <div>
+                <div class="info-title">Kickoff Time</div>
+                <div class="info-val" id="hero-time">1:00 AM</div>
+              </div>
+            </div>
+            <div class="info-item info-venue">
+              <i class="fa-solid fa-location-dot"></i>
+              <div>
+                <div class="info-title">Stadium & City</div>
+                <div class="info-val" id="hero-venue">SoFi Stadium, Los Angeles</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Countdown -->
+          <div class="countdown-container">
+            <div class="countdown-title">Countdown to Kickoff</div>
+            <div class="countdown-timer" id="countdown">
+              <div class="time-block">
+                <span class="time-num" id="cd-days">00</span>
+                <span class="time-lbl">Days</span>
+              </div>
+              <div class="time-colon">:</div>
+              <div class="time-block">
+                <span class="time-num" id="cd-hours">00</span>
+                <span class="time-lbl">Hrs</span>
+              </div>
+              <div class="time-colon">:</div>
+              <div class="time-block">
+                <span class="time-num" id="cd-mins">00</span>
+                <span class="time-lbl">Mins</span>
+              </div>
+              <div class="time-colon">:</div>
+              <div class="time-block">
+                <span class="time-num" id="cd-secs">00</span>
+                <span class="time-lbl">Secs</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Stats & Filters -->
+    <section class="controls-section">
+      <!-- Player Info Cards Grid -->
+      <div class="player-cards-grid">
+        <!-- Brenden Aaronson -->
+        <div class="player-summary-card glass active-filter" data-player="Brenden Aaronson">
+          <div class="card-glow" style="background: radial-gradient(circle, rgba(255, 205, 0, 0.15) 0%, transparent 70%);"></div>
+          <div class="player-badge">🇺🇸 USA</div>
+          <div class="player-meta">
+            <h4>Brenden Aaronson</h4>
+            <p>Midfielder • USA National Team</p>
+          </div>
+          <div class="player-stats">
+            <span class="stat-badge"><i class="fa-solid fa-calendar-days"></i> 3 Matches</span>
+          </div>
+        </div>
+        <!-- Noah Okafor -->
+        <div class="player-summary-card glass" data-player="Noah Okafor">
+          <div class="card-glow" style="background: radial-gradient(circle, rgba(227, 12, 47, 0.15) 0%, transparent 70%);"></div>
+          <div class="player-badge">🇨🇭 Switzerland</div>
+          <div class="player-meta">
+            <h4>Noah Okafor</h4>
+            <p>Forward • Switzerland National Team</p>
+          </div>
+          <div class="player-stats">
+            <span class="stat-badge"><i class="fa-solid fa-calendar-days"></i> 3 Matches</span>
+          </div>
+        </div>
+        <!-- Ao Tanaka -->
+        <div class="player-summary-card glass" data-player="Ao Tanaka">
+          <div class="card-glow" style="background: radial-gradient(circle, rgba(0, 43, 127, 0.15) 0%, transparent 70%);"></div>
+          <div class="player-badge">🇯🇵 Japan</div>
+          <div class="player-meta">
+            <h4>Ao Tanaka</h4>
+            <p>Midfielder • Japan National Team</p>
+          </div>
+          <div class="player-stats">
+            <span class="stat-badge"><i class="fa-solid fa-calendar-days"></i> 3 Matches</span>
+          </div>
+        </div>
+        <!-- Gabriel Gudmundsson -->
+        <div class="player-summary-card glass" data-player="Gabriel Gudmundsson">
+          <div class="card-glow" style="background: radial-gradient(circle, rgba(0, 106, 167, 0.15) 0%, transparent 70%);"></div>
+          <div class="player-badge">🇸🇪 Sweden</div>
+          <div class="player-meta">
+            <h4>Gabriel Gudmundsson</h4>
+            <p>Defender • Sweden National Team</p>
+          </div>
+          <div class="player-stats">
+            <span class="stat-badge"><i class="fa-solid fa-calendar-days"></i> 3 Matches</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Filters & Search Toolbar -->
+      <div class="toolbar glass">
+        <div class="search-box">
+          <i class="fa-solid fa-magnifying-glass search-icon"></i>
+          <input type="text" id="search-input" placeholder="Search by player, opponent or venue...">
+        </div>
+        <div class="filter-actions">
+          <button class="btn btn-filter active" id="btn-filter-all">All Fixtures</button>
+          <button class="btn btn-filter" id="btn-filter-upcoming">Upcoming</button>
+          <button class="btn btn-filter" id="btn-filter-derby">
+            <i class="fa-solid fa-fire"></i> Leeds Derbies
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Fixture Timeline / List -->
+    <section class="fixtures-section">
+      <div class="fixtures-header">
+        <h2 class="section-title">Match Schedule</h2>
+        <span class="results-count" id="results-count">Showing 12 fixtures</span>
+      </div>
+
+      <div class="fixtures-list" id="fixtures-list">
+        <!-- JavaScript will populate items here -->
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-content">
+      <p>&copy; 2026 Leeds United Fan Dashboard • World Cup Player Tracker</p>
+      <p class="footnote">Dates and times automatically synchronized with Google Drive Notes</p>
+    </div>
+  </footer>
+
+  <!-- Detail Modal for Predictions/Notes -->
+  <div class="modal-overlay" id="prediction-modal">
+    <div class="modal glass">
+      <button class="modal-close" id="modal-close-btn">&times;</button>
+      <div class="modal-body">
+        <h3 id="modal-match-title">Match Prediction</h3>
+        <p class="modal-subtitle" id="modal-match-date">June 13, 2026</p>
+        
+        <div class="prediction-vs-grid">
+          <div class="pred-team text-right">
+            <div class="player-avatar-med" id="modal-player-avatar">BA</div>
+            <div class="pred-name" id="modal-player-team-name">USA</div>
+          </div>
+          <div class="pred-scores">
+            <input type="number" min="0" max="99" class="score-input" id="pred-score-1" placeholder="-">
+            <span class="score-dash">:</span>
+            <input type="number" min="0" max="99" class="score-input" id="pred-score-2" placeholder="-">
+          </div>
+          <div class="pred-team text-left">
+            <div class="opponent-avatar-med"><i class="fa-solid fa-shield-halved"></i></div>
+            <div class="pred-name" id="modal-opponent-team-name">Paraguay</div>
+          </div>
+        </div>
+
+        <div class="notes-section">
+          <label for="match-notes">Match Notes & Thoughts</label>
+          <textarea id="match-notes" placeholder="Write down player performance expectations, key stats or match notes..."></textarea>
+        </div>
+
+        <div class="modal-footer">
+          <button class="btn btn-secondary" id="modal-cancel-btn">Cancel</button>
+          <button class="btn btn-primary" id="modal-save-btn">Save Entry</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
