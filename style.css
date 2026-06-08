@@ -864,10 +864,11 @@ footer {
 
 .prediction-vs-grid {
   display: grid;
-  grid-template-columns: 1fr auto 1fr;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
   align-items: center;
   gap: 16px;
   margin-bottom: 24px;
+  width: 100%;
 }
 
 .pred-team {
@@ -875,6 +876,8 @@ footer {
   flex-direction: column;
   align-items: center;
   gap: 8px;
+  min-width: 0;
+  width: 100%;
 }
 
 .text-right { text-align: right; }
@@ -892,6 +895,7 @@ footer {
   justify-content: center;
   font-weight: 700;
   font-size: 1.3rem;
+  flex-shrink: 0;
 }
 
 .opponent-avatar-med {
@@ -905,11 +909,17 @@ footer {
   align-items: center;
   justify-content: center;
   font-size: 1.3rem;
+  flex-shrink: 0;
 }
 
 .pred-name {
   font-weight: 600;
   font-size: 0.95rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 100%;
+  text-align: center;
 }
 
 .pred-scores {
